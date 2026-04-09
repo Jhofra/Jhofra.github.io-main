@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "gastos-del-mes (serve)",
+      "runtimeExecutable": "C:\\Program Files\\nodejs\\node.exe",
+      "runtimeArgs": ["node_modules/serve/build/main.js", "."],
+      "port": 5173,
+      "autoPort": true
+    }
+  ]
+}

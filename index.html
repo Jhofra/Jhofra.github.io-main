@@ -20,22 +20,66 @@
     </section>
 
     <section id="voiceFeedback" class="voice-feedback" aria-live="polite"></section>
-
     <section id="categoriesList" class="categories" aria-label="Listado de categorías"></section>
   </main>
 
+  <!-- ===== AGREGAR: Elegir tipo ===== -->
+  <dialog id="addTypeModal" class="modal">
+    <div class="form">
+      <h2>¿Qué deseas agregar?</h2>
+      <div class="type-chooser">
+        <button type="button" id="addGeneralBtn" class="btn btn--choice">
+          <span class="choice-icon">📁</span>
+          Categoría General
+        </button>
+        <button type="button" id="addSpecificBtn" class="btn btn--choice">
+          <span class="choice-icon">📌</span>
+          Categoría Específica
+        </button>
+      </div>
+      <div class="form__actions">
+        <button type="button" class="btn btn--ghost" data-close="addTypeModal">Cancelar</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ===== AGREGAR: Categoría General (wizard 2 pasos) ===== -->
+  <dialog id="addGeneralModal" class="modal">
+    <!-- Paso 1: nombre + presupuesto -->
+    <div id="addGenStep1" class="form">
+      <h2>Nueva categoría general</h2>
+      <label for="generalName">Nombre</label>
+      <input id="generalName" type="text" required maxlength="35" placeholder="Ej: Gastos diarios" />
+      <label for="generalBudget">Gasto máximo (S/)</label>
+      <input id="generalBudget" type="number" required min="0.01" step="0.01" placeholder="Ej: 500" />
+      <p id="generalError" class="form__error"></p>
+      <div class="form__actions">
+        <button type="button" class="btn btn--ghost" data-close="addGeneralModal">Cancelar</button>
+        <button type="button" id="genNextBtn" class="btn btn--primary">Siguiente</button>
+      </div>
+    </div>
+    <!-- Paso 2: subcategorías -->
+    <div id="addGenStep2" class="form" style="display:none">
+      <h2>Categorías específicas</h2>
+      <div id="subcategoryInputs" class="subcategory-inputs"></div>
+      <button type="button" id="addSubBtn" class="btn btn--add-sub">+ Agregar otra</button>
+      <p id="subcategoryError" class="form__error"></p>
+      <div class="form__actions">
+        <button type="button" id="genBackBtn" class="btn btn--ghost">Atrás</button>
+        <button type="button" id="genSaveBtn" class="btn btn--primary">Guardar</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ===== AGREGAR: Categoría Específica (independiente) ===== -->
   <dialog id="categoryModal" class="modal">
     <form id="categoryForm" class="form" method="dialog" novalidate>
-      <h2>Nueva categoría</h2>
-
+      <h2>Nueva categoría específica</h2>
       <label for="categoryName">Nombre</label>
       <input id="categoryName" name="categoryName" type="text" required maxlength="35" placeholder="Ej: Comida" />
-
       <label for="categoryBudget">Gasto máximo (S/)</label>
       <input id="categoryBudget" name="categoryBudget" type="number" required min="0.01" step="0.01" placeholder="Ej: 250" />
-
       <p id="categoryError" class="form__error"></p>
-
       <div class="form__actions">
         <button type="button" class="btn btn--ghost" data-close="categoryModal">Cancelar</button>
         <button type="submit" class="btn btn--primary">Guardar</button>
@@ -43,18 +87,60 @@
     </form>
   </dialog>
 
+  <!-- ===== GASTO: Elegir tipo ===== -->
+  <dialog id="expenseTypeModal" class="modal">
+    <div class="form">
+      <h2>¿Dónde registrar el gasto?</h2>
+      <div class="type-chooser">
+        <button type="button" id="expenseGeneralBtn" class="btn btn--choice" disabled>
+          <span class="choice-icon">📁</span>
+          Categoría General
+        </button>
+        <button type="button" id="expenseSpecificBtn" class="btn btn--choice" disabled>
+          <span class="choice-icon">📌</span>
+          Categoría Específica
+        </button>
+      </div>
+      <div class="form__actions">
+        <button type="button" class="btn btn--ghost" data-close="expenseTypeModal">Cancelar</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ===== GASTO: Categoría General (wizard 2 pasos) ===== -->
+  <dialog id="expenseGeneralModal" class="modal">
+    <!-- Paso 1: elegir categoría general -->
+    <div id="expGenStep1" class="form">
+      <h2>Gasto en categoría general</h2>
+      <label for="expGenSelect">Categoría general</label>
+      <select id="expGenSelect" required></select>
+      <p id="expGenError1" class="form__error"></p>
+      <div class="form__actions">
+        <button type="button" class="btn btn--ghost" data-close="expenseGeneralModal">Cancelar</button>
+        <button type="button" id="expGenNextBtn" class="btn btn--primary">Siguiente</button>
+      </div>
+    </div>
+    <!-- Paso 2: montos por subcategoría -->
+    <div id="expGenStep2" class="form" style="display:none">
+      <h2>Montos por categoría</h2>
+      <div id="expenseSubFields" class="expense-sub-fields"></div>
+      <p id="expGenError2" class="form__error"></p>
+      <div class="form__actions">
+        <button type="button" id="expGenBackBtn" class="btn btn--ghost">Atrás</button>
+        <button type="button" id="expGenSaveBtn" class="btn btn--secondary">Guardar</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ===== GASTO: Categoría Específica (independiente) ===== -->
   <dialog id="expenseModal" class="modal">
     <form id="expenseForm" class="form" method="dialog" novalidate>
       <h2>Registrar gasto</h2>
-
       <label for="expenseAmount">Monto (S/)</label>
       <input id="expenseAmount" name="expenseAmount" type="number" required min="0.01" step="0.01" placeholder="Ej: 20" />
-
       <label for="expenseCategory">Categoría</label>
       <select id="expenseCategory" name="expenseCategory" required></select>
-
       <p id="expenseError" class="form__error"></p>
-
       <div class="form__actions">
         <button type="button" class="btn btn--ghost" data-close="expenseModal">Cancelar</button>
         <button type="submit" class="btn btn--secondary">Guardar</button>
