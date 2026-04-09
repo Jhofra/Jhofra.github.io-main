@@ -40,6 +40,7 @@ body {
   margin-top: 12px;
 }
 
+/* ─── Actions bar ─── */
 .actions {
   margin-top: 22px;
   display: grid;
@@ -48,6 +49,7 @@ body {
   align-items: center;
 }
 
+/* ─── Buttons ─── */
 .btn {
   border: 0;
   border-radius: 12px;
@@ -85,44 +87,6 @@ body {
   color: var(--text);
 }
 
-.voice-feedback {
-  min-height: 22px;
-  margin-top: 8px;
-  color: var(--muted);
-  text-align: center;
-}
-
-.voice-feedback.listening {
-  color: var(--secondary);
-  font-weight: 600;
-}
-
-.categories {
-  margin-top: 20px;
-  display: grid;
-  gap: 14px;
-}
-
-.card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 16px;
-  box-shadow: var(--shadow);
-}
-
-.card__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.card__title {
-  margin: 0;
-  font-size: 1.1rem;
-}
-
 .btn--delete {
   background: none;
   border: 1px solid var(--danger);
@@ -142,6 +106,176 @@ body {
   transform: none;
 }
 
+.btn--delete-sm {
+  padding: 2px 7px;
+  font-size: 0.75rem;
+}
+
+/* ─── Type chooser (General / Específica) ─── */
+.type-chooser {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.btn--choice {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 20px 12px;
+  border: 2px solid var(--border);
+  border-radius: 14px;
+  background: var(--card);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color .15s, background .15s, transform .15s;
+}
+
+.btn--choice:hover {
+  border-color: var(--primary);
+  background: var(--primary-soft);
+  transform: translateY(-2px);
+}
+
+.btn--choice:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn--choice:disabled:hover {
+  border-color: var(--border);
+  background: var(--card);
+  transform: none;
+}
+
+.choice-icon {
+  font-size: 1.5rem;
+}
+
+/* ─── Subcategory inputs (wizard step 2) ─── */
+.subcategory-inputs {
+  display: grid;
+  gap: 8px;
+}
+
+.subcategory-input-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.subcategory-input-row input {
+  flex: 1;
+}
+
+.btn--remove-sub {
+  background: none;
+  border: none;
+  color: var(--danger);
+  font-size: 1.3rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  line-height: 1;
+  border-radius: 6px;
+  transition: background .15s;
+}
+
+.btn--remove-sub:hover {
+  background: rgba(239, 68, 68, .1);
+  transform: none;
+}
+
+.btn--add-sub {
+  background: none;
+  border: 2px dashed var(--border);
+  color: var(--primary);
+  border-radius: 10px;
+  padding: 10px;
+  font-weight: 600;
+  font-size: 0.92rem;
+  cursor: pointer;
+  width: 100%;
+  transition: border-color .15s, background .15s;
+}
+
+.btn--add-sub:hover {
+  border-color: var(--primary);
+  background: var(--primary-soft);
+  transform: none;
+}
+
+/* ─── Expense sub-fields (general expense wizard) ─── */
+.expense-sub-fields {
+  display: grid;
+  gap: 2px;
+}
+
+.expense-sub-field {
+  display: grid;
+  gap: 4px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.expense-sub-field:last-child {
+  border-bottom: none;
+}
+
+.expense-sub-field label {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* ─── Voice ─── */
+.voice-feedback {
+  min-height: 22px;
+  margin-top: 8px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.voice-feedback.listening {
+  color: var(--secondary);
+  font-weight: 600;
+}
+
+/* ─── Categories list ─── */
+.categories {
+  margin-top: 20px;
+  display: grid;
+  gap: 14px;
+}
+
+/* ─── Card (shared) ─── */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+
+.card--general {
+  border-left: 4px solid var(--primary);
+}
+
+.card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.card__title {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
 .metrics {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -152,6 +286,7 @@ body {
 
 .metrics strong { color: var(--text); }
 
+/* ─── Progress bars ─── */
 .progress {
   margin-top: 12px;
   width: 100%;
@@ -177,6 +312,49 @@ body {
   background: linear-gradient(90deg, #ef4444, #dc2626);
 }
 
+.progress--sm {
+  height: 8px;
+  margin-top: 6px;
+}
+
+/* ─── Subcards (inside general card) ─── */
+.subcards {
+  margin-top: 14px;
+  display: grid;
+  gap: 8px;
+  padding-left: 10px;
+  border-left: 3px solid var(--primary-soft);
+}
+
+.subcard {
+  padding: 10px 12px;
+  background: #f9fafb;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+.subcard__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.subcard__name {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.subcard__spent {
+  color: var(--muted);
+  font-size: 0.88rem;
+  margin-top: 4px;
+}
+
+.subcard__spent strong {
+  color: var(--text);
+}
+
+/* ─── Modal (dialog) ─── */
 .modal {
   border: none;
   border-radius: 16px;
@@ -186,6 +364,7 @@ body {
 
 .modal::backdrop { background: rgba(17, 24, 39, .55); }
 
+/* ─── Form ─── */
 .form {
   padding: 18px;
   display: grid;
@@ -217,7 +396,9 @@ body {
   gap: 10px;
 }
 
+/* ─── Responsive ─── */
 @media (max-width: 640px) {
   .metrics { grid-template-columns: 1fr; }
   .actions { grid-template-columns: 1fr auto 1fr; }
+  .type-chooser { flex-direction: column; }
 }
