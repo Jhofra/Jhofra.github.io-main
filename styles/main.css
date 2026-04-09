@@ -111,9 +111,35 @@ body {
   box-shadow: var(--shadow);
 }
 
+.card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
 .card__title {
-  margin: 0 0 10px;
+  margin: 0;
   font-size: 1.1rem;
+}
+
+.btn--delete {
+  background: none;
+  border: 1px solid var(--danger);
+  color: var(--danger);
+  border-radius: 8px;
+  padding: 4px 9px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  line-height: 1;
+  transition: background .15s, color .15s;
+}
+
+.btn--delete:hover {
+  background: var(--danger);
+  color: #fff;
+  transform: none;
 }
 
 .metrics {

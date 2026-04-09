@@ -65,6 +65,17 @@ function setupEvents() {
   });
 
   el.voiceBtn.addEventListener('click', handleVoiceInput);
+
+  el.categoriesList.addEventListener('click', (event) => {
+    const btn = event.target.closest('[data-delete-id]');
+    if (btn) deleteCategory(btn.dataset.deleteId);
+  });
+}
+
+function deleteCategory(id) {
+  state.categories = state.categories.filter((c) => c.id !== id);
+  persist();
+  render();
 }
 
 function createCategory() {
@@ -154,7 +165,10 @@ function renderCategories() {
 
       return `
         <article class="card">
-          <h3 class="card__title">${escapeHTML(category.name)}</h3>
+          <div class="card__header">
+            <h3 class="card__title">${escapeHTML(category.name)}</h3>
+            <button class="btn btn--delete" data-delete-id="${category.id}" aria-label="Eliminar ${escapeHTML(category.name)}">✕</button>
+          </div>
           <div class="metrics">
             <div>Presupuesto: <strong>${formatSoles(budget)}</strong></div>
             <div>Gastado: <strong>${formatSoles(spent)}</strong></div>
