@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gastos del Mes</title>
+  <link rel="stylesheet" href="./styles/main.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="app__header">
+      <h1>GASTOS DEL MES</h1>
+      <p id="emptyState" class="empty-state">No hay ningún control de dinero</p>
+    </header>
+
+    <section class="actions" aria-label="Acciones principales">
+      <button id="openExpenseModalBtn" class="btn btn--secondary">GASTO</button>
+      <button id="voiceBtn" class="btn btn--icon" title="Registrar por voz" aria-label="Registrar gasto por voz">🎙️</button>
+      <button id="openCategoryModalBtn" class="btn btn--primary">AGREGAR</button>
+    </section>
+
+    <section id="voiceFeedback" class="voice-feedback" aria-live="polite"></section>
+
+    <section id="categoriesList" class="categories" aria-label="Listado de categorías"></section>
+  </main>
+
+  <dialog id="categoryModal" class="modal">
+    <form id="categoryForm" class="form" method="dialog" novalidate>
+      <h2>Nueva categoría</h2>
+
+      <label for="categoryName">Nombre</label>
+      <input id="categoryName" name="categoryName" type="text" required maxlength="35" placeholder="Ej: Comida" />
+
+      <label for="categoryBudget">Gasto máximo (S/)</label>
+      <input id="categoryBudget" name="categoryBudget" type="number" required min="0.01" step="0.01" placeholder="Ej: 250" />
+
+      <p id="categoryError" class="form__error"></p>
+
+      <div class="form__actions">
+        <button type="button" class="btn btn--ghost" data-close="categoryModal">Cancelar</button>
+        <button type="submit" class="btn btn--primary">Guardar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="expenseModal" class="modal">
+    <form id="expenseForm" class="form" method="dialog" novalidate>
+      <h2>Registrar gasto</h2>
+
+      <label for="expenseAmount">Monto (S/)</label>
+      <input id="expenseAmount" name="expenseAmount" type="number" required min="0.01" step="0.01" placeholder="Ej: 20" />
+
+      <label for="expenseCategory">Categoría</label>
+      <select id="expenseCategory" name="expenseCategory" required></select>
+
+      <p id="expenseError" class="form__error"></p>
+
+      <div class="form__actions">
+        <button type="button" class="btn btn--ghost" data-close="expenseModal">Cancelar</button>
+        <button type="submit" class="btn btn--secondary">Guardar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script type="module" src="./src/app.js"></script>
+</body>
+</html>

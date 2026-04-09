@@ -1,0 +1,8 @@
+{
+  "appId": "com.gastosdelmes.app",
+  "appName": "Gastos del Mes",
+  "webDir": ".",
+  "server": {
+    "androidScheme": "https"
+  }
+}
